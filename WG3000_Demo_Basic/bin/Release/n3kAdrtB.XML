@@ -1,0 +1,1643 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>n3kAdrtB</name>
+    </assembly>
+    <members>
+        <member name="T:WG3000_COMM.Core.wgMjControllerSwipeOperate">
+            <summary>
+            控制器 刷卡记录操作[提取/恢复]
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeOperate.SSI_FLASH_SWIPE_STARTADDR">
+            <summary>
+            刷卡记录DF开始地址
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeOperate.SSI_FLASH_SWIPE_ENDADDR">
+            <summary>
+            刷卡记录DF结束地址
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeOperate.SWIPE_SIZE">
+            <summary>
+            单个刷卡记录的字节长度
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeOperate.SWIPE_RECORDS_MAXLEN">
+            <summary>
+            刷卡记录的最大个数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.Clear">
+            <summary>
+            清空信息
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.StopGetRecord">
+            <summary>
+            停止提取记录
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.GetSwipeLoc(System.Int32)">
+            <summary>
+            获取刷卡记录索引所在的DF地址位置
+            </summary>
+            <param name="iSwipeIndex">记录索引位</param>
+            <returns>DF地址位置</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.GetSwipeIndex(System.UInt32)">
+            <summary>
+            获取刷卡记录的索引值
+            </summary>
+            <param name="iSwipeLoc">刷卡记录的DF地址位置</param>
+            <returns>相应的记录索引</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeOperate.GetSwipeRecords(System.Int32,System.String,System.Int32,System.Data.DataTable@)">
+            <summary>
+            提取刷卡记录 放到dtSwipe中[返回值: 大于0表示提取到刷卡记录数; 等于0表示控制器无记录; 小于0表示提取失败(其中: -1表示通信中断, -13表示通信不上)]
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <param name="dtSwipe">用于存储刷卡记录的数据表DataTable</param>
+            <returns>大于0表示提取到刷卡记录数; 等于0表示控制器无记录; 小于0表示提取失败(其中: -1表示通信中断, -13表示通信不上)</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeOperate.bStopGetRecord">
+            <summary>
+            获取是否停止提取记录的信息
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeOperate.ControllerSN">
+            <summary>
+            最后读取到的控制器序列号
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgUdpComm">
+            <summary>
+            wg UDP 通信模块
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgUdpComm.timeourMsInternet">
+            <summary>
+            广域网额外延时
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgUdpComm.CommTimeoutMsMin">
+            <summary>
+            最小延时 [单位: 毫秒]
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.GetPacket">
+            <summary>
+            提取一个数据包
+            </summary>
+            <returns>数据包组</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.ClearAllPacket">
+            <summary>
+            清空所有的数据包
+            </summary>
+            <returns>true</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.Close">
+            <summary>
+            关闭时, 退出监听程
+            </summary>
+            <returns>true</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.#ctor(System.Net.IPAddress)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="localIP">电脑IP地址</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.UDPListenProc">
+            <summary>
+            监听端口线程 收到的数据放入到UDPQueue队列中
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.getXidOfCommand(System.Byte[])">
+            <summary>
+            获取指令中的发送包的id
+            </summary>
+            <param name="cmd">指令数据组</param>
+            <returns>发送包的id号</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.GetIPEndByIPAddr(System.String,System.Int32,System.Net.IPEndPoint@)">
+            <summary>
+            获取发送点
+            </summary>
+            <param name="ipAddr">ip地址</param>
+            <param name="ipPort">port端口号</param>
+            <param name="endp">获取到的发送点</param>
+            <returns>-1表示失败; 0 表示广播方式, 1表示正常局域网IP方式, 2表示广播网ip方式</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.udp_get(System.Byte[],System.Int32,System.UInt32,System.String,System.Int32,System.Byte[]@)">
+            <summary>
+            获取数据, 返回在recv中
+            </summary>
+            <param name="cmd">指令</param>
+            <param name="parWaitMs">等待时间(单位: 毫秒)</param>
+            <param name="xid">发送包id</param>
+            <param name="ipAddr">ip地址</param>
+            <param name="ipPort">port端口号</param>
+            <param name="recv">接收到的数据</param>
+            <returns>=1 表示成功; 小于0 或-13表示失败; </returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpComm.udp_get_notries(System.Byte[],System.Int32,System.UInt32,System.String,System.Int32,System.Byte[]@)">
+            <summary>
+            获取数据, 返回在recv中 [专用于生产过程  获取数据返回在recv中  不作重试操作]
+            </summary>
+            <param name="cmd">指令</param>
+            <param name="parWaitMs">等待时间(单位: 毫秒)</param>
+            <param name="xid">发送包id</param>
+            <param name="ipAddr">ip地址</param>
+            <param name="ipPort">port端口号</param>
+            <param name="recv">接收到的数据</param>
+            <returns>=1 表示成功; 小于0 或-13表示失败; </returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgUdpComm.PacketCount">
+            <summary>
+            接收到的数据包的个数
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgUdpComm.localIP">
+            <summary>
+            电脑的IP地址
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgUdpComm.udpPort">
+            <summary>
+            通信UDP端口号
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerTimeSegList">
+            <summary>
+            控制器 时段列表
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerTimeSegList.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerTimeSegList.Clear">
+            <summary>
+            清空时段列表
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerTimeSegList.AddItem(WG3000_COMM.Core.MjControlTimeSeg)">
+            <summary>
+            添加时段
+            </summary>
+            <param name="mjControlTimeSeg">时段</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerTimeSegList.ToByte">
+            <summary>
+            获取时段列表的数据组 用于发送到控制器
+            </summary>
+            <returns>序列化数据组</returns>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerRunInformation">
+            <summary>
+            控制器 运行信息
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.#ctor">
+            <summary>
+            控制器运行信息
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.WarnInfo(System.Int32)">
+            <summary>
+            指定门的报警信息
+            </summary>
+            <param name="doorNo">门号, 范围: 1,2,3,4</param>
+            <returns>报警信息</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.IsOpen(System.Int32)">
+            <summary>
+            门是否开了
+            </summary>
+            <param name="doorNO">门号, 范围:1,2,3,4</param>
+            <returns>true表示门开,false表示门关</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.PushButtonActive(System.Int32)">
+            <summary>
+            指定门的按钮是否动作
+            </summary>
+            <param name="doorNO">门号, 范围: 1,2,3,4</param>
+            <returns>true 动作/ false 没有动作</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.LockRelayActive(System.Int32)">
+            <summary>
+            指定门的锁是否动作
+            </summary>
+            <param name="doorNO">门号,范围: 1,2,3,4</param>
+            <returns>true 动作/false 没有动作</returns>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerRunInformation.newSwipes">
+            <summary>
+            新刷卡记录组[10个]
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.UpdateInfo_internal(System.Byte[],System.Int32,System.UInt32)">
+            <summary>
+            更新控制器信息
+            </summary>
+            <param name="wgpktData">接收到的控制器信息包</param>
+            <param name="startIndex">起始位置</param>
+            <param name="ControllerSN">控制器序列号</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerRunInformation.Reset">
+            <summary>
+            复位信息
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.pktlen">
+            <summary>
+            控制器运行信息数据包长
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.CurrentControllerSN">
+            <summary>
+            控制器序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.refreshTime">
+            <summary>
+            运行参数的刷新时间
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.dtNow">
+            <summary>
+            控制器当前时间 年月日 时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.weekday">
+            <summary>
+            控制器当前星期
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.swipeEndIndex">
+            <summary>
+            刷卡记录终止索引位
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.registerCardNum">
+            <summary>
+            有效的注册卡数量(不含删除的)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.appError">
+            <summary>
+            控制器故障号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.ForceLockIsActive">
+            <summary>
+            强制锁门动作
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.FireIsActive">
+            <summary>
+            火警动作
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.driverVersion">
+            <summary>
+            控制器的驱动版本号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.lastGetRecordIndex">
+            <summary>
+            最后一次提取的刷卡记录位
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerRunInformation.newRecordsNum">
+            <summary>
+            未提取的刷卡记录数
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.WGPacket._xid">
+            <summary>
+            发送包的id号
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacket.GetNewXid">
+            <summary>
+            获取新的发送包的id
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.WGPacket.driverVer">
+            <summary>
+            主驱动版本
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.WGPacket.reserved18">
+            <summary>
+            保留字节18 用于产品型号
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.WGPacket.reserved19">
+            <summary>
+            保留字节19
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacket.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacket.#ctor(System.Byte,System.Byte,System.UInt32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="typePar">类型</param>
+            <param name="codePar">代码</param>
+            <param name="snToPar">目标设备序列号</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacket.#ctor(System.Byte[])">
+            <summary>
+            构造函数 [如果是通过数据包获取相应接收的信息来分析, 则不用更改序列号]
+            </summary>
+            <param name="rcvdata">接收到的数据</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacket.ToBytes(System.UInt16)">
+            <summary>
+            获取发送用的数据包
+            </summary>
+            <param name="srcPort">发出的port口</param>
+            <returns>序列化数据组</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.MinSize">
+            <summary>
+            最小尺寸 包头
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.code">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.xid">
+            <summary>
+            发送包的id号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.iDevSnFrom">
+            <summary>
+            源  设备序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.iDevSnTo">
+            <summary>
+            目标设备序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.WGPacket.iCallReturn">
+            <summary>
+            调用=0 或 应答=1
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacketBasicRemoteOpenDoorToSend.#ctor(System.Int32,System.Int32)">
+            <summary>
+            远程开门/电梯楼层直达
+            </summary>
+            <param name="DoorNO">门号, 范围1-4</param>
+            <param name="FloorNO">楼层号, 范围0-80. 在门号=1时有效, 0表示所有梯控NC动作, 1-40对应层NO动作, 41-80对应层NC动作</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.WGPacketBasicRemoteOpenDoorToSend.specialDoorNo4ping(System.Int32)">
+            <summary>
+            检测控制器是否丢包的伪指令ping
+            </summary>
+            <param name="NO"></param>
+        </member>
+        <member name="T:WG3000_COMM.Core.MjRegisterCardsParam">
+            <summary>
+            将其内部外 [屏蔽不公开的功能]
+            </summary>
+            <summary>
+            注册卡权限参数
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.iPrivilegeFirstIndexSSI_FLASH_PRIVILEGE_STARTADDR">
+            <summary>
+            第一个权限的DF起始位
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.newPrivilegePage4KAddr">
+            <summary>
+            存储新有序权限的4K的页面
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.freeNewPrivilegePageAddr">
+            <summary>
+            自由的记录页面(无序的)
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.bOrderInfreePrivilegePage">
+            <summary>
+            是否有序的(自由页面中)
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.totalPrivilegeCount">
+            <summary>
+            总权限数
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.deletedPrivilegeCount">
+            <summary>
+            已删除的权限数
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.minPrivilegeOf4K">
+            <summary>
+            卡号最小值数组
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjRegisterCardsParam.maxPrivilegeOf4K">
+            <summary>
+            卡号最大值数组
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCardsParam.updateParam(System.Byte[],System.Int32)">
+            <summary>
+            采用接收到的数据 更新此权限参数表
+            </summary>
+            <param name="wgpktData">接收到的权限参数表数组</param>
+            <param name="startIndex">起始位置</param>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCardsParam.MaxPrivilegesNum">
+            <summary>
+            最大权限数
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.ERR_PRIVILEGES_OVER200K">
+            <summary>
+            错误提示: 权限不能超过20万
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.ERR_PRIVILEGES_STOPUPLOAD">
+            <summary>
+            错误提示: 权限停止上传
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.ERR_SWIPERECORD_STOPGET">
+            <summary>
+            错误提示: 停止提取记录
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.PRIVILEGES_UPLOADPREPARING">
+            <summary>
+            权限上传: 正在准备数据
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.PRIVILEGES_UPLOADING">
+            <summary>
+            权限上传: 正在上传
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.PRIVILEGES_UPLOADED">
+            <summary>
+            权限上传: 上传完成
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgTools.COMM_UDP_PORT">
+            <summary>
+            控制器的UDP通信端口 (默认60000)
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.IsValidDateTimeFormat(System.String)">
+            <summary>
+            检查日期时间格式是否有效
+            </summary>
+            <param name="dateTimeFormat">文本</param>
+            <returns>true 是/ flase 否</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.WgDebugWrite(System.String,System.Object[])">
+            <summary>
+            写入调试信息
+            </summary>
+            <param name="info">信息</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.WriteLine(System.String)">
+            <summary>
+            写入调试信息[含计时功能]
+            </summary>
+            <param name="info">信息</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.SetObjToStr(System.Object)">
+            <summary>
+            对象转换为字符串
+            </summary>
+            <param name="valA">对象</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.IsAllFF(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            正常全为FF返回true, 否则返回false
+            </summary>
+            <param name="arrbyt">数据组</param>
+            <param name="startIndex">开始位(从0开始计)</param>
+            <param name="len">检查的长度</param>
+            <returns>正常全为FF返回true, 否则返回false</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.Compress(System.IO.FileInfo)">
+            <summary>
+            压缩
+            </summary>
+            <param name="fi"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgTools.Decompress(System.IO.FileInfo)">
+             <summary>
+            解压
+             </summary>
+             <param name="fi"></param>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgTools.YMDHMSFormat">
+            <summary>
+            日期时间格式: 年月日时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgTools.MSGTITLE">
+            <summary>
+            提示框标题文字
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerPrivilege">
+            <summary>
+            控制器 权限处理
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.StopUpload">
+            <summary>
+            停止上传权限
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.AllowUpload">
+            <summary>
+            允许上传权限
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.StopDownload">
+            <summary>
+            停止下载权限
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.AllowDownload">
+            <summary>
+            允许下载权限
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.DisplayProcessInfo(System.String,System.Int32,System.Int32)">
+            <summary>
+            显示进程信息[开发中自定义]
+            </summary>
+            <param name="info">信息描述</param>
+            <param name="infoCode">信息代码</param>
+            <param name="specialInfo">特殊信息编号</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.ClearAllPrivilegeIP(System.Int32,System.String,System.Int32)">
+            <summary>
+            清除控制器上的所有权限
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.UploadIP(System.Int32,System.String,System.Int32,System.String,System.Data.DataTable)">
+            <summary>
+            上传权限 [正常速度: 1000个/秒]
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <param name="doorName">门名称</param>
+            <param name="dtPrivilege">发送的权限表DataTable</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.UploadIP_internal(System.Int32,System.String,System.Int32,System.String,System.Data.DataTable,System.String)">
+            <summary>
+            上传权限 [正常速度: 1000个/秒]
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <param name="doorName">门名称</param>
+            <param name="dtPrivilege">发送的权限表DataTable</param>
+            <param name="PCIPAddr">发出指令的电脑IP地址</param>
+            <returns>成功返回1, 失败返回-1</returns>        
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.DownloadIP(System.Int32,System.String,System.Int32,System.String,System.Data.DataTable@)">
+            <summary>
+            从控制器获取权限信息
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器IP地址</param>
+            <param name="Port">Port端口</param>
+            <param name="doorName">门名称(可为空)</param>
+            <param name="dtPrivilege">获取到的权限数据表</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.DownloadIP_internal(System.Int32,System.String,System.Int32,System.String,System.Data.DataTable@,System.String)">
+            <summary>
+            从控制器获取权限信息
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器IP地址</param>
+            <param name="Port">Port端口</param>
+            <param name="doorName">门名称(可为空)</param>
+            <param name="dtPrivilege">获取到的权限数据表</param>
+            <param name="PCIPAddr">发出指令的电脑IP地址</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.DelPrivilegeOfOneCardIP(System.Int32,System.String,System.Int32,System.UInt32)">
+            <summary>
+            删除某个卡在控制器上的所有权限
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <param name="CardID">卡号</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerPrivilege.AddPrivilegeOfOneCardIP(System.Int32,System.String,System.Int32,WG3000_COMM.Core.MjRegisterCard)">
+            <summary>
+            增加某个卡在控制器上的权限
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="IP">控制器的ip地址</param>
+            <param name="Port">控制器的port端口号</param>
+            <param name="mjrc">单个注册卡权限</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerPrivilege.bStopUploadPrivilege">
+            <summary>
+            获取是否停止上传权限的信息
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerPrivilege.bStopDownloadPrivilege">
+            <summary>
+            获取是否停止下载权限的信息
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpServerCom.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgUdpServerCom.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerSwipeRecord">
+            <summary>
+            控制器 刷卡记录
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.#ctor(System.Byte[],System.UInt32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="rec">接收到的数据组</param>
+            <param name="startIndex">起始位置</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.#ctor(System.Byte[],System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="rec">接收到的数据组</param>
+            <param name="startIndex">起始位置</param>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="loc">DF中的存储位置</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="strRecordAll">单个刷卡记录的字符串</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.Update(System.String)">
+            <summary>
+            由单个刷卡记录的字符串进行更新
+            </summary>
+            <param name="strRecordAll">单个刷卡记录的字符串</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.Update(System.Byte[],System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            更新刷卡记录信息
+            </summary>
+            <param name="rec">接收到的数据组</param>
+            <param name="startIndex">起始位置</param>
+            <param name="ControllerSN">控制器序列号</param>
+            <param name="loc">DF中的存储位置</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.ToStringRaw">
+            <summary>
+            获取只含基本原始记录信息的字符串
+            </summary>
+            <returns>信息串</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerSwipeRecord.ToDisplaySimpleInfo(System.Boolean)">
+            <summary>
+            显示刷卡记录的简单信息
+            </summary>
+            <param name="bChinese">true表示中文信息; false表示英文信息</param>
+            <returns>简单信息</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.SwipeStatus">
+            <summary>
+            刷卡状态
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.ControllerSN">
+            <summary>
+            控制器序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.ReadDate">
+            <summary>
+            刷卡日期时间
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.CardID">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.ReaderNo">
+            <summary>
+            读卡器号(1-4)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.DoorNo">
+            <summary>
+            门号(1-4)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.IsEnterIn">
+            <summary>
+            是否进门
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.eventCategory">
+            <summary>
+            获取事件类型
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerSwipeRecord.ReasonNo">
+            <summary>
+            记录无效时的原因代码
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory">
+            <summary>
+            控制器 刷卡记录的事件类型
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.SwipePass">
+            <summary>
+            刷卡允许通过
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.SwipeNOPass">
+            <summary>
+            刷卡禁止通过
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.SwipePassLimitted">
+            <summary>
+            限次刷卡允许通过
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.SwipeNOPassLimitted">
+            <summary>
+            限次刷卡禁止通过
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.ValidEvent">
+            <summary>
+            有效事件[如按钮动作, 门磁开关, 超级密码开门等]
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.Warn">
+            <summary>
+            报警事件
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerSwipeRecord.EventCategory.RemoteOpen">
+            <summary>
+            远程开门
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.OnEventHandler">
+            <summary>
+            实时监控时有数据的触发处理事件
+            </summary>
+            <param name="message">数据信息字符串</param>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgWatchingService">
+            <summary>
+            实时监控服务
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.GetRunInfo(System.Int32)">
+            <summary>
+            获取指定序列号的控制器的运行信息
+            </summary>
+            <param name="ControllerSN">控制器序列号</param>
+            <returns>控制器运行信息</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.InitializeLifetimeService">
+            <summary>
+            服务时长(进行无限期)
+            </summary>
+            <returns>null空</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.StopWatch">
+            <summary>
+            停止监控
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgWatchingService.CheckControllerCommStatus(System.Int32,WG3000_COMM.Core.wgMjControllerRunInformation@)">
+            <summary>
+            检查控制器的通信状态  
+            返回值 
+            -2 表示指定控制器不处于监控状态 
+            -1 表示未连接;
+             1 表示连接;  
+             0 表示正在连接中
+            </summary>
+            <param name="controllerSN">控制器序列号</param>
+            <param name="conRunInfo">监控到的控制器信息(返回值为1时有效)</param>
+            <returns>
+            -2 表示指定控制器不处于监控状态 
+            -1 表示未连接;
+             1 表示连接;  
+             0 表示正在连接中
+            </returns>
+        </member>
+        <member name="E:WG3000_COMM.Core.wgWatchingService.EventHandler">
+            <summary>
+            事件处理
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgWatchingService.WatchingController">
+            <summary>
+            要监控的控制器表
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgWatchingService.Watching_Cycle_ms">
+            <summary>
+            监控周期 默认5秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgWatchingService.unconnect_timeout_sec">
+            <summary>
+            多长时间未通信上, 则认为是断开
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjControllerConfigure">
+            <summary>
+            控制器 参数表
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_FORCE">
+            <summary>
+            胁迫报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_DOOROPENTOOLONG">
+            <summary>
+            门正常打开时间过长报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_DOORINVALIDOPEN">
+            <summary>
+            门强行打开报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_FORCECLOSE">
+            <summary>
+            强制锁门报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_DOORINVALIDREAD">
+            <summary>
+            不能开门的刷卡[非法刷卡]报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_FIRELINK">
+            <summary>
+            火警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_ALARM">
+            <summary>
+            防盗报警
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNBIT_FORCE_WITHCARD">
+            <summary>
+            胁迫密码必须有合法卡刷了之后才行
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNOUT_IF_FORCE">
+            <summary>
+            如果非法闯入, 则一直报警直到其复位
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNOUT_IF_DOOROPENTOOLONG">
+            <summary>
+            门打开时间过长, 则一直报警直到其复位[有最小延时约束
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARNOUT_NODELAY_IF_DOOROPENTOOLONG">
+            <summary>
+            门打开时间过长, 则一直报警直到其复位[无最小延时约束]
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.ALARMOUT_IF_SETBYCARD_PIN">
+            <summary>
+            设防
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.ALARMOUT_IF_24HOUR_PIN">
+            <summary>
+            24HOUR 设防
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.ALARMOUT_IF_HELP_PIN">
+            <summary>
+            HELP 求救
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjControllerConfigure.WARN_MIN_TIMEOUT_DEFAULT">
+            <summary>
+            报警的最小输出时间3秒[只要发生报警则保留最少3秒时间],最大是6553秒
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="pkt">接收到的数据组</param>
+            <param name="startIndex">开始位置</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.Clear">
+            <summary>
+            清空控制器参数表
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.RestoreDefault">
+            <summary>
+            设置所有的参数都复位, 用于缺省参数复位
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.DoorDelayGet(System.Int32)">
+            <summary>
+            获取指定门的开门延时 [秒]
+            </summary>
+            <param name="DoorNO">门号, 范围: 1,2,3,4</param>
+            <returns>指定门的开门延时 [秒]</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.DoorDelaySet(System.Int32,System.Int32)">
+            <summary>
+            设置指定门的开门延时 [秒]
+            </summary>
+            <param name="DoorNO">门号, 范围: 1,2,3,4</param>
+            <param name="value">开门延时 [秒], 默认3秒</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.DoorControlGet(System.Int32)">
+            <summary>
+            获取指定门的控制方式
+            </summary>
+            <param name="DoorNO">门号, 范围: 1,2,3,4</param>
+            <returns>控制方式(3=在线, 2=常闭, 1=常开 0=不受控)</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjControllerConfigure.DoorControlSet(System.Int32,System.Int32)">
+            <summary>
+            设置指定门的控制方式
+            </summary>
+            <param name="DoorNO">门号, 范围: 1,2,3,4</param>
+            <param name="value">控制方式(3=在线, 2=常闭, 1=常开 0=不受控)</param>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.controllerSN">
+            <summary>
+            控制器序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.holidayControl">
+            <summary>
+            假期约束 缺省=0不启用; =1 启用
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.ip">
+            <summary>
+            控制器的IP地址
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.mask">
+            <summary>
+            控制器的mask掩码
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.gateway">
+            <summary>
+            控制器的gateway网关
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.port">
+            <summary>
+            控制器通信端口port [默认为60000]
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.MACAddr">
+            <summary>
+            控制器的MAC地址
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.webDeviceName">
+            <summary>
+            控制器 web 设备名 
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.webPort">
+            <summary>
+            控制器web通信端口webport [默认为80, 如果为0,65535表示未启用web功能]
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.webDateDisplayFormat">
+            <summary>
+            控制器web 日期显示样式 [英文, 默认:yyyy-MM-dd ]
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.webDateDisplayFormatCHS">
+            <summary>
+            控制器web 日期显示样式 [中文, 默认:年-月-日 ]
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.webLanguage">
+            <summary>
+            WEB操作界面 语言 
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjControllerConfigure.pcIPAddr">
+            <summary>
+            获取控制器配置时采用的电脑IP
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.wgMjController">
+            <summary>
+            控制器类
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjController.Door_Online">
+            <summary>
+            门控制方式: 在线
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjController.Door_NC">
+            <summary>
+            门控制方式: 常闭
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjController.Door_NO">
+            <summary>
+            门控制方式: 常开
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjController.Door_OnlyAllowFirstCard">
+            <summary>
+            门控制方式: 只许首卡开门
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.wgMjController.Door_Offline">
+            <summary>
+            门控制方式: 不受控
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.Dispose(System.Boolean)">
+            <summary>
+            释放资源1
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetControllerType(System.Int32)">
+            <summary>
+            获取控制器类型 0表示不存在,1,2,4分别表示单门,双门,四门
+            </summary>
+            <param name="controllerSN">控制器序列号</param>
+            <returns>范围: 0,1,2,4</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.IsElevator_Internal(System.Int32)">
+            <summary>
+            判断控制器是否是电梯控制器
+            </summary>
+            <param name="controllerSN">控制器序列号</param>
+            <returns>true / false</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetControllerReaderNum(System.Int32)">
+            <summary>
+            指定序列号控制器拥有的读卡器数, 0表示无效
+            </summary>
+            <param name="controllerSN">控制器序列号</param>
+            <returns>范围: 0,2,4</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetMjControllerRunInformationIP">
+            <summary>
+            获取控制器运行信息
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetMjControllerRunInformationIP(System.Byte[]@)">
+            <summary>
+            获取控制器运行信息
+            </summary>
+            <param name="recvInfo">接收到的运行信息数据</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetMjControllerRunInformationIP_internal(System.Byte[]@,System.String)">
+            <summary>
+            获取控制器运行信息
+            </summary>
+            <param name="recvInfo">接收到的运行信息数据</param>
+            <param name="PCIPAddr">发出指令的电脑IP地址</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.AdjustTimeIP(System.DateTime)">
+            <summary>
+            校准控制器时间
+            </summary>
+            <param name="dateTimeNew">新的日期时间值</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.AdjustTimeIP_internal(System.DateTime,System.String)">
+            <summary>
+            校准控制器时间
+            </summary>
+            <param name="dateTimeNew">新的日期时间值</param>
+            <param name="PCIPAddr">发出指令的电脑IP地址</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.RemoteOpenDoorIP(System.Int32)">
+            <summary>
+            远程开门
+            </summary>
+            <param name="doorNO">门号, 范围:1,2,3,4</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.RemoteOpenDoorIP_internal(System.Int32,System.UInt32,System.UInt64)">
+            <summary>
+            远程开门
+            </summary>
+            <param name="doorNO">门号, 范围:1,2,3,4</param>
+            <param name="operatorId">操作员ID</param>
+            <param name="operatorCardNO">通过USB发卡器刷卡的卡号</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetProductInfoIP(System.String@,System.String@)">
+            <summary>
+            获取产品信息
+            </summary>
+            <param name="compactInfo">详细控制器信息</param>
+            <param name="Desc">简单描述信息</param>
+            <returns>简单描述信息[为空时, 表示通信失败, 没有获取到信息]</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateConfigureIP(WG3000_COMM.Core.wgMjControllerConfigure)">
+            <summary>
+            更新参数配置
+            </summary>
+            <param name="mjconf">控制器参数表</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateConfigureIP(System.Byte[],System.Byte[])">
+            <summary>
+            更新参数配置
+            </summary>
+            <param name="dataParam">参数数据组</param>
+            <param name="dataNeedUpdate">要更新的参数的数据位的数据组</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateControlTimeSegListIP(System.Byte[])">
+            <summary>
+            更新时段列表
+            </summary>
+            <param name="controlTimeSegListData">时段列表的数据组</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.RenewControlTaskListIP">
+            <summary>
+            刷新定时任务列表[更新动作]
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateFRamIP_internal(System.UInt32,System.UInt32)">
+            <summary>
+            更新FRam参数
+            </summary>
+            <param name="FRamIndex">0-15</param>
+            <param name="newValue">新值</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetControlDataIP_internal(System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+            从控制器获取CPU中的配置数据
+            </summary>
+            <param name="start">起始位</param>
+            <param name="len">长度</param>
+            <param name="data">数据组</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateLastGetRecordLocationIP(System.UInt32)">
+            <summary>
+            更新最后提取记录的索引位 [用于提取记录后的操作]
+            </summary>
+            <param name="newValue">记录索引位</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.RestoreAllSwipeInTheControllersIP">
+            <summary>
+            恢复控制器中的所有刷卡记录
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.WarnResetIP">
+            <summary>
+            报警复位
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.SpecialPingIP">
+            <summary>
+            控制器的Ping操作
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetConfigureIP(System.Byte[]@)">
+            <summary>
+            从控制器获取参数配置
+            </summary>
+            <param name="controlConfigureData">获取到的参数数据组</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.GetConfigureIP(WG3000_COMM.Core.wgMjControllerConfigure@)">
+            <summary>
+            从控制器获取参数配置
+            </summary>
+            <param name="controlConfigure">获取到的参数</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.FormatIP">
+            <summary>
+            格式化控制器 [时间约2分钟] (必须要设置有效的控制器序列号)
+            </summary>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.UpdateConfigureSuperIP_internal(System.Byte[])">
+            <summary>
+            直接由数据包进行配置
+            </summary>
+            <param name="data">含有信息的数据组</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.SearchControlers(System.Collections.ArrayList@)">
+            <summary>
+            搜索控制器
+            </summary>
+            <param name="arrController">搜索到的控制器wgMjControllerConfigure组</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.wgMjController.NetIPConfigure(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            修改控制器的IP配置
+            </summary>
+            <param name="strSN">控制器序列号</param>
+            <param name="strMac">控制器MAC地址</param>
+            <param name="strIP">控制器 新的IP地址</param>
+            <param name="strMask">控制器 新的Mask掩码</param>
+            <param name="strGateway">控制器 新的Gateway网关</param>
+            <param name="strPort">控制器 新的通信端口port(默认60000)</param>
+            <param name="PCIPAddr">电脑的IP地址(可为空)</param>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjController.ControllerDriverMainVer">
+            <summary>
+            控制器驱动 主版本
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjController.ControllerSN">
+            <summary>
+            控制器序列号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjController.IP">
+            <summary>
+            控制器 IP地址
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjController.PORT">
+            <summary>
+            控制器 通信端口 默认为60000
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.wgMjController.RunInfo">
+            <summary>
+            获取到的运行信息
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.MjControlTimeSeg">
+            <summary>
+            时段
+            </summary>
+        </member>
+        <member name="F:WG3000_COMM.Core.MjControlTimeSeg.m_ControlByHoliday">
+            <summary>
+            是否受假期控制(0或255表示不受假期控制, 其他值表示受假期控制
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjControlTimeSeg.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjControlTimeSeg.ToBytes">
+            <summary>
+            获取数据组
+            </summary>
+            <returns>序列化数据组</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.SegIndex">
+            <summary>
+            时段索引号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.weekdayControl">
+            <summary>
+            星期控制
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.nextSeg">
+            <summary>
+            下一个链接时段 [默认为0 结束]
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.LimittedMode">
+            <summary>
+            限次模式  =0所有读卡器的刷卡数统一计数; =1 各个读卡器的刷卡数独立计数
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.TotalLimittedAccess">
+            <summary>
+            时段的总次数限制 (默认为0 不限制, 最大值31)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.LimittedAccess1">
+            <summary>
+            时区1的次数限制 (默认为0 不限制, 最大值31)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.LimittedAccess2">
+            <summary>
+            时区2的次数限制 (默认为0 不限制, 最大值31)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.LimittedAccess3">
+            <summary>
+            时区3的次数限制 (默认为0 不限制, 最大值31)
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsStart1">
+            <summary>
+            时区1的起始时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsEnd1">
+            <summary>
+            时区1的截止时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsStart2">
+            <summary>
+            时区2的起始时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsEnd2">
+            <summary>
+            时区2的截止时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsStart3">
+            <summary>
+            时区3的起始时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.hmsEnd3">
+            <summary>
+            时区3的截止时分秒
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.ymdStart">
+            <summary>
+            有效起始年月日
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.ymdEnd">
+            <summary>
+            有效终止年月日
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjControlTimeSeg.ControlByHoliday">
+            <summary>
+            是否受假期控制 (0 表示不受假期控制, 1 表示受假期控制)
+            </summary>
+        </member>
+        <member name="T:WG3000_COMM.Core.MjRegisterCard">
+            <summary>
+            注册卡权限
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.FirstCardGet(System.Byte)">
+            <summary>
+            获取指定门的是否为首卡
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <returns>true 是 / false 否</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.FirstCardSet(System.Byte,System.Boolean)">
+            <summary>
+            设置指定门的是否为首卡
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <param name="val">true 是 / false 否</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.ControlSegIndexGet(System.Byte)">
+            <summary>
+            获取指定门的控制时段索引号
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <returns>时段索引号</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.ControlSegIndexSet(System.Byte,System.Byte)">
+            <summary>
+            设置指定门的控制时段索引号
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <param name="ControlSegIndex">时段索引号, 范围: 0 到 254</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.MoreCardGroupIndexGet(System.Byte)">
+            <summary>
+            获取指定门的多卡组号
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <returns>多卡组号</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.MoreCardGroupIndexSet(System.Byte,System.Byte)">
+            <summary>
+            设置指定门的多卡组号
+            </summary>
+            <param name="DoorNo">门号, 范围: 1,2,3,4</param>
+            <param name="moreCardGroupIndex">多卡组号, 范围: 0到15</param>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.ToBytes">
+            <summary>
+            获取数据组
+            </summary>
+            <returns>序列化数据组</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.Update(System.Byte[],System.UInt32)">
+            <summary>
+            利用数组更新当前注册卡信息
+            </summary>
+            <param name="bytRegisterCard">注册卡数据组</param>
+            <param name="flashAddr">存储地址</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="M:WG3000_COMM.Core.MjRegisterCard.Update(System.String)">
+            <summary>
+            利用字符串更新当前注册卡信息
+            </summary>
+            <param name="strRegisterCardAll">单个权限的字符串</param>
+            <returns>成功返回1, 失败返回-1</returns>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.AllowFloors_internal">
+            <summary>
+            允许到的楼层 bit从0到39表示1到40楼, bit.40表示多层 要按按键
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.CardID">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.Password">
+            <summary>
+            六位数密码
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.ymdStart">
+            <summary>
+            有效起始年月日
+            </summary>
+        </member>
+        <member name="P:WG3000_COMM.Core.MjRegisterCard.ymdEnd">
+            <summary>
+            有效终止年月日
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FDE1665E-CC49-453C-9868-CD9C738F1B00}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WG3000_Demo</RootNamespace>
+    <AssemblyName>WG3000_Demo</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WG3000_Demo.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="n3kAdrtB">
+      <HintPath>..\..\N3000_DLL\n3k_controller\bin\Release\n3kAdrtB.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dfrmControllerSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dfrmControllerSetup.Designer.cs">
+      <DependentUpon>dfrmControllerSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dfrmNetControllerConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dfrmNetControllerConfig.Designer.cs">
+      <DependentUpon>dfrmNetControllerConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dfrmTCPIPConfigure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dfrmTCPIPConfigure.Designer.cs">
+      <DependentUpon>dfrmTCPIPConfigure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmController.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmController.Designer.cs">
+      <DependentUpon>frmController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmControlTimeSegment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlTimeSegment.Designer.cs">
+      <DependentUpon>frmControlTimeSegment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrivilege.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrivilege.Designer.cs">
+      <DependentUpon>frmPrivilege.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWatching.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWatching.Designer.cs">
+      <DependentUpon>frmWatching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dfrmControllerSetup.resx">
+      <DependentUpon>dfrmControllerSetup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dfrmNetControllerConfig.resx">
+      <DependentUpon>dfrmNetControllerConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dfrmNetControllerConfig.zh-CHS.resx">
+      <DependentUpon>dfrmNetControllerConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dfrmTCPIPConfigure.resx">
+      <DependentUpon>dfrmTCPIPConfigure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dfrmTCPIPConfigure.zh-CHS.resx">
+      <DependentUpon>dfrmTCPIPConfigure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmController.resx">
+      <DependentUpon>frmController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControlTimeSegment.resx">
+      <DependentUpon>frmControlTimeSegment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrivilege.resx">
+      <DependentUpon>frmPrivilege.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWatching.resx">
+      <DependentUpon>frmWatching.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
